@@ -2329,3 +2329,76 @@ button:active,
   flex-wrap: wrap;
   gap: 15px;
 }
+/* Hero background slider */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-bg .hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  animation: heroImageSlider 8s infinite;
+}
+
+/* First image */
+.hero-bg .slide-one {
+  opacity: 1;
+  animation-delay: 0s;
+}
+
+/* Second image */
+.hero-bg .slide-two {
+  animation-delay: -4s;
+}
+
+/* Each image displays for about 4 seconds */
+@keyframes heroImageSlider {
+  0%, 45% {
+    opacity: 1;
+  }
+
+  50%, 95% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Keep your dark overlay */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 20, 45, 0.88) 0%,
+    rgba(5, 20, 45, 0.65) 55%,
+    rgba(5, 20, 45, 0.35) 100%
+  );
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg .hero-slide {
+    animation: none;
+  }
+
+  .hero-bg .slide-one {
+    opacity: 1;
+  }
+
+  .hero-bg .slide-two {
+    opacity: 0;
+  }
+}
